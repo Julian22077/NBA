@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">nbadraft</string>
+    <string name="title_activity_main">nbadraft</string>
+    <string name="package_name">com.nbadraft.app</string>
+    <string name="custom_url_scheme">com.nbadraft.app</string>
+</resources>
