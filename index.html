@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NBA Draft – Quinteto Inicial</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #0f172a;
+  color: #fff;
+}
+
+header {
+  background: #111827;
+  padding: 1rem;
+  text-align: center;
+}
+
+.container {
+  padding: 1rem;
+}
+
+.position {
+  background: #1f2933;
+  padding: 0.8rem;
+  border-radius: 12px;
+  margin-bottom: 1rem;
+}
+
+select {
+  width: 100%;
+  padding: 0.6rem;
+  border-radius: 8px;
+  border: none;
+}
+
+.court {
+  margin-top: 1.5rem;
+  background: #c2410c;
+  border-radius: 16px;
+  padding: 1rem;
+  min-height: 340px;
+  position: relative;
+  border: 4px solid #f97316;
+  overflow: hidden;
+}
+
+.court-player {
+  position: absolute;
+  transform: translateX(-50%);
+  font-size: clamp(0.65rem, 2.5vw, 0.85rem);
+  font-weight: bold;
+  text-align: center;
+  max-width: 110px;
+  word-break: break-word;
+}
+
+.team {
+  background: #020617;
+  padding: 1rem;
+  border-radius: 12px;
+  margin-top: 1rem;
+}
+
+.buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+button {
+  padding: 0.6rem 1rem;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+}
+
+.reset {
+  background: #7f1d1d;
+  color: #fff;
+}
+</style>
+</head>
+
+<body>
+<header>
+  <h1>Draft NBA – Quinteto Inicial</h1>
+</header>
+
+<div class="container">
+
+<!-- POSICIONES -->
+<div class="position">
+  <h3>Base (PG)</h3>
+  <select id="pg" onchange="updateTeam()">
+    <option value="">Selecciona</option>
+    <option>Stephen Curry</option>
+    <option>Luka Dončić</option>
+    <option>Ja Morant</option>
+    <option>Damian Lillard</option>
+  </select>
+</div>
+
+<div class="position">
+  <h3>Escolta (SG)</h3>
+  <select id="sg" onchange="updateTeam()">
+    <option value="">Selecciona</option>
+    <option>Devin Booker</option>
+    <option>Anthony Edwards</option>
+    <option>Klay Thompson</option>
+    <option>Donovan Mitchell</option>
+  </select>
+</div>
+
+<div class="position">
+  <h3>Alero (SF)</h3>
+  <select id="sf" onchange="updateTeam()">
+    <option value="">Selecciona</option>
+    <option>LeBron James</option>
+    <option>Kevin Durant</option>
+    <option>Jayson Tatum</option>
+    <option>Jimmy Butler</option>
+  </select>
+</div>
+
+<div class="position">
+  <h3>Ala-Pívot (PF)</h3>
+  <select id="pf" onchange="updateTeam()">
+    <option value="">Selecciona</option>
+    <option>Giannis Antetokounmpo</option>
+    <option>Anthony Davis</option>
+    <option>Zion Williamson</option>
+    <option>Pascal Siakam</option>
+  </select>
+</div>
+
+<div class="position">
+  <h3>Pívot (C)</h3>
+  <select id="c" onchange="updateTeam()">
+    <option value="">Selecciona</option>
+    <option>Nikola Jokić</option>
+    <option>Joel Embiid</option>
+    <option>Bam Adebayo</option>
+    <option>Rudy Gobert</option>
+  </select>
+</div>
+
+<!-- MEDIA CANCHA (ARRIBA) -->
+<div class="court">
+
+  <!-- Zona pintada -->
+  <div style="
+    position:absolute;
+    top:0;
+    left:30%;
+    width:40%;
+    height:45%;
+    border:2px solid #fff;
+    border-top:none;
+  "></div>
+
+  <!-- Semicírculo tiro libre -->
+  <div style="
+    position:absolute;
+    top:45%;
+    left:50%;
+    width:90px;
+    height:45px;
+    border:2px solid #fff;
+    border-top:none;
+    border-radius:0 0 90px 90px;
+    transform:translateX(-50%);
+  "></div>
+
+  <!-- Arco triple -->
+  <div style="
+    position:absolute;
+    top:-140px;
+    left:50%;
+    width:320px;
+    height:320px;
+    border:2px solid #fff;
+    border-radius:50%;
+    transform:translateX(-50%);
+  "></div>
+
+  <!-- Tablero -->
+  <div style="
+    position:absolute;
+    top:10px;
+    left:50%;
+    width:60px;
+    height:6px;
+    background:#fff;
+    transform:translateX(-50%);
+  "></div>
+
+  <!-- Aro -->
+  <div style="
+    position:absolute;
+    top:22px;
+    left:50%;
+    width:20px;
+    height:20px;
+    border:2px solid #fff;
+    border-radius:50%;
+    transform:translateX(-50%);
+  "></div>
+
+  <!-- JUGADORES (ATAQUE HACIA ABAJO) -->
+  <div id="court-c"  class="court-player" style="top:18%; left:50%;">C</div>
+  <div id="court-pf" class="court-player" style="top:30%; left:35%;">PF</div>
+  <div id="court-pg" class="court-player" style="top:48%; left:50%;">PG</div>
+  <div id="court-sg" class="court-player" style="top:55%; left:78%;">SG</div>
+  <div id="court-sf" class="court-player" style="top:55%; left:22%;">SF</div>
+
+</div>
+
+<div class="buttons">
+  <button onclick="saveLineup()">Guardar equipo</button>
+  <button onclick="clearLineup()">Vaciar</button>
+  <button class="reset" onclick="resetAll()">Reiniciar todo</button>
+</div>
+
+<div class="team">
+  <h3>Equipos guardados</h3>
+  <div id="savedTeams"></div>
+</div>
+
+</div>
+
+<script>
+function updateTeam() {
+  ['pg','sg','sf','pf','c'].forEach(pos => {
+    const value = document.getElementById(pos).value;
+    document.getElementById('court-' + pos).innerText = value || pos.toUpperCase();
+  });
+}
+
+function clearLineup() {
+  ['pg','sg','sf','pf','c'].forEach(p => document.getElementById(p).value = '');
+  updateTeam();
+}
+
+function getTeams() {
+  return JSON.parse(localStorage.getItem('nbaTeams') || '[]');
+}
+
+function saveTeams(teams) {
+  localStorage.setItem('nbaTeams', JSON.stringify(teams));
+}
+
+function saveLineup() {
+  const lineup = {
+    id: Date.now(),
+    pg: pg.value,
+    sg: sg.value,
+    sf: sf.value,
+    pf: pf.value,
+    c:  c.value
+  };
+
+  const teams = getTeams();
+  teams.push(lineup);
+  saveTeams(teams);
+  renderTeams();
+}
+
+function loadLineup(id) {
+  const team = getTeams().find(t => t.id === id);
+  if (!team) return;
+
+  pg.value = team.pg;
+  sg.value = team.sg;
+  sf.value = team.sf;
+  pf.value = team.pf;
+  c.value  = team.c;
+
+  updateTeam();
+}
+
+function resetAll() {
+  localStorage.removeItem('nbaTeams');
+  clearLineup();
+  renderTeams();
+}
+
+function renderTeams() {
+  const container = document.getElementById('savedTeams');
+  container.innerHTML = '';
+
+  getTeams().forEach((t, i) => {
+    const btn = document.createElement('button');
+    btn.textContent = `Equipo ${i + 1}`;
+    btn.onclick = () => loadLineup(t.id);
+    container.appendChild(btn);
+  });
+}
+
+renderTeams();
+</script>
+</body>
+</html>
